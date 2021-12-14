@@ -10,10 +10,6 @@ const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
 client.once('ready', () => {
 	console.log('Ready!');
 });
-client.on('messageCreate', message => {
-	if (message.content === 'ping') {
-		message.channel.send('pong');
-	}
-});
+
 // Login to Discord with your client's token
 client.login(token);
