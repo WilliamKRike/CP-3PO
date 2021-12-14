@@ -17,14 +17,16 @@ client.on('interactionCreate', async interaction => {
 	const { commandName } = interaction;
 
 	if (commandName === 'ping') {
-		await interaction.reply('Pong!');
-
-	} else if (commandName === 'server') {
+		await interaction.reply('Pongg!');
+	}
+	else if (commandName === 'server') {
 		await interaction.reply('Server info.');
-	} else if (commandName === 'user') {
+	}
+	else if (commandName === 'user') {
 		await interaction.reply('User info.');
-	} else if (commandName === 'hi') {
-	    await interaction.reply('Kill Yourself');
+	}
+	else if (commandName === 'hi') {
+		await interaction.reply('Kill Yourself');
 	}
 });
 
