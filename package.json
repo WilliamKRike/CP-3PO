@@ -4,5 +4,8 @@
     "description": "Time to kill!",
     "main": "bot.js",
     "author": "Andromeda Team",
-    "dependencies": {}
-  }
+    "dependencies": {
+        "discord.io": "^2.5.3",
+        "winston": "^3.3.3"
+    }
+}
