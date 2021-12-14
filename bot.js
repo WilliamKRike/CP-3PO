@@ -18,6 +18,7 @@ client.on('interactionCreate', async interaction => {
 
 	if (commandName === 'ping') {
 		await interaction.reply('Pong!');
+
 	} else if (commandName === 'server') {
 		await interaction.reply('Server info.');
 	} else if (commandName === 'user') {
@@ -26,5 +27,6 @@ client.on('interactionCreate', async interaction => {
 	    await interaction.reply('Kill Yourself');
 	}
 });
+
 // Login to Discord with your client's token
 client.login(token);
