@@ -12,3 +12,6 @@ client.once('ready', () => {
 
 // Login to Discord with your client's token
 client.login(token);
+
+const channel = client.channels.cache.get('920136440183140392');
+channel.send('eat my pants');
