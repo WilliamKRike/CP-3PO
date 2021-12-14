@@ -1,0 +1,8 @@
+{
+    "name": "CP-3PO",
+    "version": "1.0.0",
+    "description": "Time to kill!",
+    "main": "bot.js",
+    "author": "Andromeda Team",
+    "dependencies": {}
+  }
