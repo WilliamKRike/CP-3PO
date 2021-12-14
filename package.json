@@ -1,0 +1,19 @@
+{
+  "name": "CP-3PO",
+  "version": "1.0.0",
+  "description": "bot for Andromeda",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "Andromeda",
+  "license": "ISC",
+  "dependencies": {
+    "discord.js": "^13.3.1",
+    "dotenv": "^10.0.0"
+  },
+  "devDependencies": {
+    "eslint": "^8.4.1"
+  }
+}
