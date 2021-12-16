@@ -28,6 +28,9 @@ client.on('interactionCreate', async interaction => {
 	else if (commandName === 'hi') {
 		await interaction.reply(`Kill Yourself ${interaction.user.username}`);
 	}
+	else if (commandName === 'kolbysearchhistory') {
+		await interaction.reply('1.Pineapple nudes\n2.Norewegian men in diapers\n3.How to get girlfriend who plays wow\n4.Do I need to shower\n5.NorewegianPeopleMeet web site');
+	}
 });
 
 // Login to Discord with your client's token
