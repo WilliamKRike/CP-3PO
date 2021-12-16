@@ -26,7 +26,7 @@ client.on('interactionCreate', async interaction => {
 		await interaction.reply('User info.');
 	}
 	else if (commandName === 'hi') {
-		await interaction.reply('Kill Yourself');
+		await interaction.reply(`Kill Yourself ${interaction.user.username}`);
 	}
 });
 

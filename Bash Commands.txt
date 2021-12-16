@@ -1,0 +1,6 @@
+Bash Commands
+
+node deploy-commands.js //Updates commands
+
+node bot.js //runs the bot
+
