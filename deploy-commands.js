@@ -8,6 +8,7 @@ const commands = [
 	new SlashCommandBuilder().setName('server').setDescription('Replies with server info!'),
 	new SlashCommandBuilder().setName('user').setDescription('Replies with user info!'),
 	new SlashCommandBuilder().setName('hi').setDescription('Replies with a special message'),
+	new SlashCommandBuilder().setName('kolbysearchhistory').setDescription('Replies with Kolby`s 5 most recent searches'),
 ]
 	.map(command => command.toJSON());
 
