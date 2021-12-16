@@ -1,6 +1,6 @@
 // at the top of your file
-const { MessageEmbed, Interaction } = require('discord.js');
-
+const { MessageEmbed } = require('discord.js');
+// Interaction, Message
 // inside a command, event listener, etc.
 const exampleEmbed = new MessageEmbed()
 	.setColor('#0099ff')
@@ -20,4 +20,4 @@ const exampleEmbed = new MessageEmbed()
 	.setTimestamp()
 	.setFooter('Some footer text here', 'https://i.imgur.com/AfFp7pu.png');
 
-Interaction.send({ embeds: [exampleEmbed] });
+MessageEmbed.send({ embeds: [exampleEmbed] });
