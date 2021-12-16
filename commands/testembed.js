@@ -1,3 +1,4 @@
+/*
 // at the top of your file
 const { MessageEmbed } = require('discord.js');
 // Interaction, Message
@@ -21,3 +22,4 @@ const exampleEmbed = new MessageEmbed()
 	.setFooter('Some footer text here', 'https://i.imgur.com/AfFp7pu.png');
 
 MessageEmbed.send({ embeds: [exampleEmbed] });
+*/
