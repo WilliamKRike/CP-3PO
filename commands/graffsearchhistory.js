@@ -11,11 +11,11 @@ module.exports = {
 			.setColor('#0099ff')
 			.setTitle('Search history in the past 24 hours')
 			.setURL('https://discord.js.org/')
-			.setAuthor('Google', '', 'https://google.com')
+			.setAuthor('Google', 'https://cdn.discordapp.com/avatars/169631919447867393/bf20c3615f581491e8013dc649cdf0cd.webp?size=128', 'https://google.com')
 			.setDescription('Graffster44`s Search History')
 
 			.addFields(
-				{ name: '1. Underage Women \n2. Underage boys\n3. Matt Damon nudes\n4. How to tell my long distance girlfriend i have an extra chromosome\n5.TFT anime music video' },
+				{ name: 'Top 5 Searches:', value: '1. Underage Women \n2. Underage boys\n3. Matt Damon nudes\n4. How to tell my long distance girlfriend i have an extra chromosome\n5.TFT anime music video' },
 				{ name: '\u200B', value: '\u200B' },
 			)
 			.setImage('https://cdn.discordapp.com/avatars/169631919447867393/bf20c3615f581491e8013dc649cdf0cd.webp?size=128')
