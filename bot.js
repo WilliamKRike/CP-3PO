@@ -38,6 +38,7 @@ client.on('interactionCreate', interaction => {
 	if (!command) return;
 
 	try {
+
 		command.execute(interaction);
 	}
 	catch (error) {
