@@ -1,13 +1,17 @@
 // Require the necessary discord.js classes
 const fs = require('fs');
+// gets the information from discord.js
 const { Client, Collection, Intents } = require('discord.js');
+// used for token and guild values
 const { token } = require('./config.json');
 
 // Create a new client instance
-const client = new Client({ intents: [Intents.FLAGS.GUILDS] });
+// Add flags such as guild_membors or guilds
+const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS] });
 
 client.commands = new Collection();
 
+// creates an array of commands from the command file
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 
 for (const file of commandFiles) {
@@ -17,8 +21,9 @@ for (const file of commandFiles) {
 	client.commands.set(command.data.name, command);
 }
 
+// creates an array of files from the commands file
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
-
+// Whenever you add an event make sure the flag for the event is enabled in Intents
 for (const file of eventFiles) {
 	const event = require(`./events/${file}`);
 	if (event.once) {
@@ -38,6 +43,7 @@ client.on('interactionCreate', interaction => {
 	if (!command) return;
 
 	try {
+
 		command.execute(interaction);
 	}
 	catch (error) {
