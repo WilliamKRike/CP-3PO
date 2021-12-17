@@ -1,12 +1,13 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { VoiceConnection } = require('@discordjs/voice');
+const { getVoiceConnection } = require('@discordjs/voice');
 // const { Guild } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('connect')
-		.setDescription('connect to current channel'),
+		.setName('leave')
+		.setDescription('leave the current channel'),
 	execute(message) {
-		message.reply('Joining channel...');
-		VoiceConnection.destroy();
+		const connection = getVoiceConnection(message.guild.id);
+		message.reply('Leaving channel...');
+		connection.destroy();
 	} };
