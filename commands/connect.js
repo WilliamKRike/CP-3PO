@@ -7,6 +7,7 @@ module.exports = {
 		.setName('connect')
 		.setDescription('connect to current channel'),
 	execute(message) {
+		message.reply('Joining channel...');
 		joinVoiceChannel({
 			channelId: message.member.voice.channel.id,
 			guildId: message.guild.id,
