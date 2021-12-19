@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { getVoiceConnection } = require('@discordjs/voice');
+const { getVoiceConnection, createAudioPlayer } = require('@discordjs/voice');
 // const { Guild } = require('discord.js');
 
 module.exports = {
@@ -9,5 +9,7 @@ module.exports = {
 	execute(message) {
 		const connection = getVoiceConnection(message.guild.id);
 		message.reply('Leaving channel...');
+		const player = createAudioPlayer();
+		player.stop();
 		connection.destroy();
 	} };
