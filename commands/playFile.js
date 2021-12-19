@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { joinVoiceChannel } = require('@discordjs/voice');
 const { createReadStream } = require('fs');
-const { createAudioResource, StreamType, AudioPlayerStatus, createAudioPlayer, getNextResource, NoSubscriberBehavior } = require('@discordjs/voice');
+const { createAudioResource, StreamType, AudioPlayerStatus, createAudioPlayer, NoSubscriberBehavior } = require('@discordjs/voice');
 // const { Client, Intents } = require('discord.js');
 // const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_VOICE_STATES] });
 
@@ -50,12 +50,12 @@ module.exports = {
 		// is it idle?
 		player.on(AudioPlayerStatus.Idle, () => {
 			console.log('its idle!!!');
-			player.play(getNextResource());
+			// player.play(getNextResource());
 		});
 
 		// is it broken?
 		player.on('error', error => {
 			console.error(`Error: ${error.message} with resource ${error.resource.metadata.title}`);
-			player.play(getNextResource());
+			// player.play(getNextResource());
 		});
 	} };
