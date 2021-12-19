@@ -24,8 +24,11 @@ module.exports = {
 				noSubscriber: NoSubscriberBehavior.Pause,
 			},
 		});
+		// play pre-established file!
+		player.play(resource);
+		console.log('Playing song!');
 
-		// check for error again
+		// check for error again ??
 		player.on('error', error => {
 			console.error('Error:', error.message, 'with track', error.resource.metadata.title);
 		});
@@ -52,9 +55,7 @@ module.exports = {
 				connection.destroy();
 			}
 		});
-		// play pre-established file!
-		player.play(resource);
-		console.log('Playing song!');
+
 
 		// is the player playing?
 		player.on(AudioPlayerStatus.Playing, () => {
