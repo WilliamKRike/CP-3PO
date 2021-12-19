@@ -35,10 +35,10 @@ module.exports = {
 
 
 		// set the color of the attatchment
-		context.strokeStyle = '#009ff';
+		//context.strokeStyle = '#009ff';
 
-		// draw a rectangle around the canvas
-		context.strokeRect(0, 0, canvas.width - 20, canvas.height - 20);
+		// draw a rectangle around the canvas, this works its just really thin
+		//context.strokeRect(0, 0, canvas.width - 20, canvas.height - 20);
 
 		// Add text for user draw
 		// /////////////////////////////////////////////////////////////////////////////////////
