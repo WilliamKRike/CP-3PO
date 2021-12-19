@@ -3,8 +3,8 @@ const { joinVoiceChannel } = require('@discordjs/voice');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('connect')
-		.setDescription('connect to current channel'),
+		.setName('playFile')
+		.setDescription('play a file to current channel'),
 	execute(message) {
 		message.reply('Joining channel...');
 		joinVoiceChannel({
