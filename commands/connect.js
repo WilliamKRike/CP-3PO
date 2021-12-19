@@ -1,5 +1,5 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { joinVoiceChannel } = require('@discordjs/voice');
+const { joinVoiceChannel, createAudioPlayer, createAudioResource } = require('@discordjs/voice');
 
 module.exports = {
 	data: new SlashCommandBuilder()
@@ -12,4 +12,8 @@ module.exports = {
 			guildId: message.guild.id,
 			adapterCreator: message.guild.voiceAdapterCreator,
 		});
+
+		const player = createAudioPlayer();
+		const resource = createAudioResource('C:/Users/Rike/Downloads/snestownsims.mp3');
+		player.play(resource);
 	} };
