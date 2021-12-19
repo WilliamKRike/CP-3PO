@@ -38,6 +38,7 @@ module.exports = {
 			},
 		});
 
+		// eslint-disable-next-line no-unused-vars
 		player.on(VoiceConnectionStatus.Disconnected, async (oldState, newState) => {
 			try {
 				await Promise.race([
