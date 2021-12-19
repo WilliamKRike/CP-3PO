@@ -1,7 +1,7 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const { joinVoiceChannel, getVoiceConnection, entersState } = require('@discordjs/voice');
 const { createReadStream } = require('fs');
-const { createAudioResource, StreamType, AudioPlayerStatus, createAudioPlayer, NoSubscriberBehavior, VoiceConnectionStatus } = require('@discordjs/voice');
+const { createAudioResource, AudioPlayerStatus, createAudioPlayer, NoSubscriberBehavior, VoiceConnectionStatus } = require('@discordjs/voice');
 // const { Client, Intents } = require('discord.js');
 // const client = new Client({ intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILD_VOICE_STATES] });
 
@@ -31,8 +31,8 @@ module.exports = {
 		});
 
 		// because FFMPEG is for chuds
-		const resource = createAudioResource(createReadStream('./snestownsims.ogg'), {
-			inputType: StreamType.OggOpus,
+		const resource = createAudioResource(createReadStream('./snestownsims.mp3'), {
+			inlineVolume: true,
 			metadata: {
 				title: 'test song',
 			},
