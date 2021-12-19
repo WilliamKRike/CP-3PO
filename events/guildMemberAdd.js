@@ -11,7 +11,7 @@ module.exports = {
 		// console.log(member.nickname);
 
 		// welcome channel
-		const greetCh = '920136440183140392';
+		const greetCh = '826221643482529822';
 		// roles channel
 		const roleCh = '685009677922467840';
 		// message to be printed in welcome channel
@@ -25,13 +25,14 @@ module.exports = {
 		// ////////////////////////////////////////////////////////////////////////////////////
 
 		// create a 700 x 250 profile
-		const canvas = Canvas.createCanvas(700, 350);
+		const canvas = Canvas.createCanvas(900, 350);
 		// modifies canvas
 		const context = canvas.getContext('2d');
 		// set the background
 		const background = await Canvas.loadImage('./background.jpg');
 		// This uses the canvas dimensions to stretch the image onto the entire canvas
 		context.drawImage(background, 0, 0, canvas.width, canvas.height);
+
 
 		// set the color of the attatchment
 		context.strokeStyle = '#009ff';
@@ -44,29 +45,38 @@ module.exports = {
 		// select the font size and font
 		context.font = '60px sans-serif';
 		// pick the color
-		context.fillStyle = '#ffffff';
+		context.fillStyle = '#808080';
 		// include
-		context.fillText(member.displayname,60, 170, canvas.width / 2.5, canvas.height / 3.5);
+		context.fillText(member.user.tag, 40, 325, 250, 5);
 		// Avatar image draw
 		// /////////////////////////////////////////////////////////////////////////////////////
 		// pick up pen
 		context.beginPath();
 
 		// create the arc for the circle
-		context.arc(140, 160, 100, 0, Math.PI * 2, true);
+		context.arc(160, 138, 122, 0, Math.PI * 2, true);
 
 		// put down pen
 		context.closePath();
 
+		// save image before clip
+		context.save();
 		// clip off the region
 		context.clip();
 
 		const avatar = await Canvas.loadImage(member.displayAvatarURL({ format: 'jpg' }));
 
 		// Draw a shape onto the main canvas
-		context.drawImage(avatar, 25, 50, 215, 215);
+		context.drawImage(avatar, 27, 8, 270, 270);
 
-		
+
+		// restore settings to before clip (undo clipping)
+		context.restore();
+		// set the avatar
+		const avatarBorder = await Canvas.loadImage('./avBorder.png');
+
+		context.drawImage(avatarBorder, 34, 12, 260, 260);
+
 
 		// Message Attatchment simply shortens code by adding values to a new item
 		const attachment = new MessageAttachment(canvas.toBuffer(), 'profile-image.png');
