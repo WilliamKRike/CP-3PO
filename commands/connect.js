@@ -1,6 +1,6 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { joinVoiceChannel } = require('@discordjs/voice');
-
+const { joinVoiceChannel, getVoiceConnection } = require('@discordjs/voice');
+const { Client, VoiceState } = require('discord.js');
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('connect')
@@ -12,4 +12,8 @@ module.exports = {
 			guildId: message.guild.id,
 			adapterCreator: message.guild.voiceAdapterCreator,
 		});
+		console.log(VoiceState.channelId);
+		if (Client.voice) {
+			console.log('its here');
+		}
 	} };
