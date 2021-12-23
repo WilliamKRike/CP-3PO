@@ -42,4 +42,5 @@ module.exports = {
 		player.on('error', error => {
 			console.error('Error:', error.message, 'with track', error.resource.metadata.title);
 		});
-	} };
+	},
+};
