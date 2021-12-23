@@ -6,9 +6,6 @@ const { MessageAttachment } = require('discord.js');
 module.exports = {
 	name: 'guildMemberAdd',
 	async execute(member) {
-		// display info in console
-		// console.log('member joined');
-		// console.log(member.nickname);
 
 		// welcome channel
 		const greetCh = '826221643482529822';
@@ -32,13 +29,6 @@ module.exports = {
 		const background = await Canvas.loadImage('./background.jpg');
 		// This uses the canvas dimensions to stretch the image onto the entire canvas
 		context.drawImage(background, 0, 0, canvas.width, canvas.height);
-
-
-		// set the color of the attatchment
-		// context.strokeStyle = '#009ff';
-
-		// draw a rectangle around the canvas, this works its just really thin
-		// context.strokeRect(0, 0, canvas.width - 20, canvas.height - 20);
 
 		// Add text for user draw
 		// /////////////////////////////////////////////////////////////////////////////////////
