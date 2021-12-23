@@ -19,7 +19,7 @@ module.exports = {
 		connection.subscribe(player);
 
 		// initialize the file
-		const resource = createAudioResource(createReadStream('./fart.mp3'), {
+		const resource = createAudioResource(createReadStream('./video.mp3'), {
 			inlineVolume: true,
 			metadata: {
 				title: 'test song',
