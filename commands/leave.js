@@ -1,14 +1,12 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
-const { getVoiceConnections, createAudioPlayer } = require('@discordjs/voice');
-
+const { getVoiceConnection } = require('@discordjs/voice');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('leave')
 		.setDescription('leave the current channel'),
 	execute(message) {
-
-		console.log(message.guild.me.voice.channelId);
+		const connection = getVoiceConnection(message.guildId);
 		// if it's already not in a lobby do nothing
 		if (message.guild.me.voice.channelId == null) {
 			message.reply('The bot is not connected to any channel, you dip');
@@ -18,12 +16,8 @@ module.exports = {
 			message.reply(`The bot is in a different voice channel, ${message.guild.me.voice.channel}, you dip`);
 		}
 		else {
-			const connection = getVoiceConnections(message.guild.id);
 			message.reply('Leaving channel...');
-			const player = createAudioPlayer();
-			player.stop();
-			connection.destroy();
+			connection.disconnect();
+			console.log(message.guild.me.voice.channelId);
 		}
-
-
 	} };

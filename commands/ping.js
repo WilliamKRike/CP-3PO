@@ -4,7 +4,9 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('ping')
 		.setDescription('Replies with Pong!'),
-	async execute(interaction) {
-		await interaction.reply(`Pong! ${interaction.user}`);
+	execute(interaction) {
+		const textCh = interaction.channelId;
+		const channel = interaction.guild.channels.cache.get(textCh);
+		channel.send(`Pong! ${interaction.user}`);
 	},
 };
