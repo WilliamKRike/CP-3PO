@@ -9,6 +9,9 @@ module.exports = {
 			.setRequired(true)),
 	async execute(interaction) {
 		const age = interaction.options.getInteger('input');
-		await interaction.reply(`you are ${age} years old!`);
+		await interaction.reply(`You are ${age} years old!`);
+
+		const command = interaction.client.commands.get('ping');
+		command.execute(interaction);
 	},
 };

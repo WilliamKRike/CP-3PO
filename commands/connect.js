@@ -12,12 +12,8 @@ module.exports = {
 			guildId: message.guild.id,
 			adapterCreator: message.guild.voiceAdapterCreator,
 		});
-		console.log(message.guild.me.voice.channelId);
 		const textCh = message.channelId;
 		const channel = message.guild.channels.cache.get(textCh);
-
 		channel.send(`The lobby I am in is ${message.guild.me.voice.channelId}`);
-		/* if (Client.voice) {
-			console.log('its here');
-		}*/
+		console.log(message.guild.me.voice.channelId);
 	} };
