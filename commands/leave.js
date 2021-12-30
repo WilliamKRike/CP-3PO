@@ -16,7 +16,7 @@ module.exports = {
 			message.reply(`The bot is in a different voice channel, ${message.guild.me.voice.channel}, you dip`);
 		}
 		else {
-			message.reply('Leaving channel...');
+			message.channel.send('Leaving channel...');
 			connection.disconnect();
 			console.log(message.guild.me.voice.channelId);
 		}
