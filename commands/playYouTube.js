@@ -14,10 +14,10 @@ module.exports = {
 			.setRequired(true)),
 	async execute(message) {
 		message.reply('Your song has been added!');
-		if (AudioPlayerStatus.Playing) {
+		/* if (AudioPlayerStatus.Playing) {
 			console.log('already playing');
 			return;
-		}
+		}*/
 		// define variables used to search and download urls
 		const args = message.options.getString('query');
 
@@ -67,15 +67,15 @@ module.exports = {
         */
 
 		// player.play(resource);
-	/*
-		console.log('Playing song!');
+
+		// console.log('Playing song!');
 		connection.on('stateChange', (oldState, newState) => {
 			console.log(`Connection transitioned from ${oldState.status} to ${newState.status}`);
 		});
 		player.on('stateChange', (oldState, newState) => {
 			console.log(`Audio player transitioned from ${oldState.status} to ${newState.status}`);
 		});
-		*/
+
 	},
 };
 
@@ -103,9 +103,16 @@ const video_player = async (guild, args, player, message) => {
 	// play file
 	player.play(resource);
 	// listen after the song is playing
-	player.on(AudioPlayerStatus.Idle, () => {
+	player.on('stateChange', (oldState, newState) => {
+		if (oldState.status == 'playing' && newState.status == 'idle') {
+			console.log('song ended');
+			song_queue.songs.shift();
+			video_player(guild, song_queue.songs[0], player, message);
+		}
+	});
+	/*player.on(AudioPlayerStatus.Idle, () => {
 		song_queue.songs.shift();
 		video_player(guild, song_queue.songs[0], player, message);
-	});
+	});*/
 	await message.channel.send(`🎶 Now playing **${resource.title}**`);
 };
