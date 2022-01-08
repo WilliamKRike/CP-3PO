@@ -1,4 +1,4 @@
-# CP-3PO <br />
+# TR-1N3R <br />
 Plans for bot <br />
 -Send messages <br />
 -join voice channels <br />
