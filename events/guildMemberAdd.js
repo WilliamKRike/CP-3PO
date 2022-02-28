@@ -8,7 +8,7 @@ module.exports = {
 	async execute(member) {
 
 		// welcome channel
-		const greetCh = '685009677922467840';
+		const greetCh = '826221643482529822';
 		// roles channel
 		const roleCh = '685009677922467840';
 		// message to be printed in welcome channel

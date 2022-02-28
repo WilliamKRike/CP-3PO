@@ -4,7 +4,7 @@ module.exports = {
 
 		// emit event debugging
 
-		oldMember.client.emit('guildMemberAdd', oldMember);
+		// oldMember.client.emit('guildMemberAdd', oldMember);
 
 	},
 };
