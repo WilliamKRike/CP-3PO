@@ -8,11 +8,11 @@ module.exports = {
 	async execute(member) {
 
 		// welcome channel
-		const greetCh = '826221643482529822';
+		const greetCh = '685009677922467840';
 		// roles channel
 		const roleCh = '685009677922467840';
 		// message to be printed in welcome channel
-		const greetMsg = `Welcome <@${member.id}> to Andromeda, get your roles in the ${member.guild.channels.cache.get(roleCh).toString()} channel` ;
+		const greetMsg = `Welcome <@${member.id}> to the Hydeout, get your roles in the ${member.guild.channels.cache.get(roleCh).toString()} channel` ;
 
 		// get get the channel to send the messag eto
 		const channel = member.guild.channels.cache.get(greetCh);
@@ -26,18 +26,11 @@ module.exports = {
 		// modifies canvas
 		const context = canvas.getContext('2d');
 		// set the background
-		const background = await Canvas.loadImage('./background.jpg');
+		const background = await Canvas.loadImage('./hyBackground.png');
 		// This uses the canvas dimensions to stretch the image onto the entire canvas
 		context.drawImage(background, 0, 0, canvas.width, canvas.height);
 
-		// Add text for user draw
-		// /////////////////////////////////////////////////////////////////////////////////////
-		// select the font size and font
-		context.font = '60px sans-serif';
-		// pick the color
-		context.fillStyle = '#808080';
-		// include
-		context.fillText(member.user.tag, 40, 325, 250, 5);
+		
 		// Avatar image draw
 		// /////////////////////////////////////////////////////////////////////////////////////
 		// pick up pen
@@ -63,10 +56,18 @@ module.exports = {
 		// restore settings to before clip (undo clipping)
 		context.restore();
 		// set the avatar
-		const avatarBorder = await Canvas.loadImage('./avBorder.png');
+		const avatarBorder = await Canvas.loadImage('./sakuraBorder.png');
 
-		context.drawImage(avatarBorder, 34, 12, 260, 260);
+		context.drawImage(avatarBorder, -55, -60, 445, 420);
 
+		// Add text for user draw
+		// /////////////////////////////////////////////////////////////////////////////////////
+		// select the font size and font
+		context.font = '60px sans-serif';
+		// pick the color
+		context.fillStyle = '#000000';
+		// include
+		context.fillText(member.user.tag, 40, 335, 250, 5);
 
 		// Message Attatchment simply shortens code by adding values to a new item
 		const attachment = new MessageAttachment(canvas.toBuffer(), 'profile-image.png');
