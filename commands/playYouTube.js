@@ -1,5 +1,5 @@
 const play = require('play-dl');
-const { createAudioPlayer, createAudioResource, joinVoiceChannel, NoSubscriberBehavior, AudioPlayerStatus } = require('@discordjs/voice');
+const { createAudioPlayer, createAudioResource, joinVoiceChannel, NoSubscriberBehavior } = require('@discordjs/voice');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const queue = new Map();
 // TypeScript: import ytdl from 'ytdl-core'; with --esModuleInterop
