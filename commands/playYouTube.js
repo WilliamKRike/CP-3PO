@@ -24,7 +24,7 @@ module.exports = {
 		// define queue for server
 		const serverQueue = queue.get(message.guild.id);
 
-		// join vc and create player/resource objects
+		// create player/resource objects
 		const connection = joinVoiceChannel({
 			channelId : message.member.voice.channel.id,
 			guildId : message.guild.id,
@@ -35,9 +35,11 @@ module.exports = {
 				noSubscriber: NoSubscriberBehavior.Play,
 			},
 		});
-		connection.subscribe(player);
 		// makeQueue
 		if (!serverQueue) {
+			//	join vc to play it
+			connection.subscribe(player);
+
 			const queue_constructor = {
 				voiceChannel: message.member.voice.channel.id,
 				textChannel: message.channelId,
@@ -53,6 +55,7 @@ module.exports = {
 			video_player(message.guild.id, queue_constructor.songs[0], player, message);
 		}
 		else {
+			console.log('push song here');
 			serverQueue.songs.push(args);
 			console.log('current queue');
 			console.log(serverQueue);
@@ -110,7 +113,7 @@ const video_player = async (guild, args, player, message) => {
 			video_player(guild, song_queue.songs[0], player, message);
 		}
 	});
-	/*player.on(AudioPlayerStatus.Idle, () => {
+	/* player.on(AudioPlayerStatus.Idle, () => {
 		song_queue.songs.shift();
 		video_player(guild, song_queue.songs[0], player, message);
 	});*/
