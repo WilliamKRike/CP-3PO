@@ -1,6 +1,7 @@
 const play = require('play-dl');
 const { createAudioPlayer, createAudioResource, joinVoiceChannel, NoSubscriberBehavior } = require('@discordjs/voice');
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const skipKai = require('./skipKai');
 const queue = new Map();
 // TypeScript: import ytdl from 'ytdl-core'; with --esModuleInterop
 // TypeScript: import * as ytdl from 'ytdl-core'; with --allowSyntheticDefaultImports
@@ -12,14 +13,15 @@ module.exports = {
 		.addStringOption(option => option.setName('query')
 			.setDescription('Enter terms or link here')
 			.setRequired(true)),
-	async execute(message) {
+	async execute(message, skipCheck) {
 		message.reply('Your song has been added!');
+
+
 		/* if (AudioPlayerStatus.Playing) {
 			console.log('already playing');
 			return;
 		}*/
-		// define variables used to search and download urls
-		const args = message.options.getString('query');
+
 
 		// define queue for server
 		const serverQueue = queue.get(message.guild.id);
@@ -35,6 +37,19 @@ module.exports = {
 				noSubscriber: NoSubscriberBehavior.Play,
 			},
 		});
+
+		if (skipCheck == true) {
+			console.log('skip was true');
+			player.on('idle', () => {
+				//songsArray.shift();
+				console.log("inside idle state");
+				//Play next song
+			});
+			//video_player(message.guild.id, serverQueue.songs[0], player, message, true);
+			return;
+		}
+		// define variables used to search and download urls
+		const args = message.options.getString('query');
 		// makeQueue
 		if (!serverQueue) {
 			//	join vc to play it
@@ -52,7 +67,7 @@ module.exports = {
 			console.log(args);
 			queue_constructor.songs.push(args);
 			// console.log(queue_constructor.songs[0]);
-			video_player(message.guild.id, queue_constructor.songs[0], player, message);
+			video_player(message.guild.id, queue_constructor.songs[0], player, message, false);
 		}
 		else {
 			console.log('push song here');
@@ -82,7 +97,22 @@ module.exports = {
 	},
 };
 
-const video_player = async (guild, args, player, message) => {
+// skip function
+const skip = async (guild, player, message) => {
+	const song_queue = queue.get(message.guild.id);
+	console.log(song_queue);
+
+	player.pause();
+};
+
+// playing function
+const video_player = async (guild, args, player, message, skip2) => {
+	if (skip2 == true) {
+		console.log('before pause');
+		player.destroy();
+		console.log('after pause');
+		return;
+	}
 	const song_queue = queue.get(message.guild.id);
 	console.log('queue info ** queue info');
 	console.log(song_queue);
@@ -110,7 +140,7 @@ const video_player = async (guild, args, player, message) => {
 		if (oldState.status == 'playing' && newState.status == 'idle') {
 			console.log('song ended');
 			song_queue.songs.shift();
-			video_player(guild, song_queue.songs[0], player, message);
+			video_player(guild, song_queue.songs[0], player, message, false);
 		}
 	});
 	/* player.on(AudioPlayerStatus.Idle, () => {
