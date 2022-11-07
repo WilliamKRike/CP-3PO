@@ -1,5 +1,5 @@
 const play = require('play-dl');
-const { createAudioPlayer, createAudioResource, joinVoiceChannel, NoSubscriberBehavior } = require('@discordjs/voice');
+const { AudioPlayerState, AudioPlayerStatus, createAudioPlayer, createAudioResource, joinVoiceChannel, NoSubscriberBehavior } = require('@discordjs/voice');
 const { SlashCommandBuilder } = require('@discordjs/builders');
 const skipKai = require('./skipKai');
 const queue = new Map();
@@ -16,13 +16,6 @@ module.exports = {
 	async execute(message, skipCheck) {
 		message.reply('Your song has been added!');
 
-
-		/* if (AudioPlayerStatus.Playing) {
-			console.log('already playing');
-			return;
-		}*/
-
-
 		// define queue for server
 		const serverQueue = queue.get(message.guild.id);
 
@@ -34,18 +27,19 @@ module.exports = {
 		});
 		const player = createAudioPlayer({
 			behaviors: {
-				noSubscriber: NoSubscriberBehavior.Play,
+				noSubscriber: NoSubscriberBehavior.Stop,
 			},
 		});
 
 		if (skipCheck == true) {
 			console.log('skip was true');
 			player.on('idle', () => {
-				//songsArray.shift();
-				console.log("inside idle state");
-				//Play next song
+				// songs.shift();
+				console.log('inside idle state');
+				// Play next song
+
 			});
-			//video_player(message.guild.id, serverQueue.songs[0], player, message, true);
+			// video_player(message.guild.id, serverQueue.songs[0], player, message, true);
 			return;
 		}
 		// define variables used to search and download urls
@@ -83,10 +77,6 @@ module.exports = {
         console.log(yt_info.video_details.title)
         let stream = await play.stream_from_info(yt_info)
         */
-
-		// player.play(resource);
-
-		// console.log('Playing song!');
 		connection.on('stateChange', (oldState, newState) => {
 			console.log(`Connection transitioned from ${oldState.status} to ${newState.status}`);
 		});
@@ -101,8 +91,19 @@ module.exports = {
 const skip = async (guild, player, message) => {
 	const song_queue = queue.get(message.guild.id);
 	console.log(song_queue);
-
 	player.pause();
+};
+const playNext = async (guild, args, player, message) => {
+// search based on next arg
+	const yt_info = await play.search(args, { limit:1 });
+	// create stream from arg
+	const stream = await play.stream(yt_info[0].url);
+	// after stream generated, create file from the url of hte search query
+	const resource = createAudioResource(stream.stream, {
+		inputType : stream.type,
+	});
+	player.play(resource);
+	await message.channel.send(`🎶 Now playing **${resource.title}**`);
 };
 
 // playing function
@@ -117,7 +118,7 @@ const video_player = async (guild, args, player, message, skip2) => {
 	console.log('queue info ** queue info');
 	console.log(song_queue);
 
-	// If no song is left in the server queue. Leave the voice channel and delete the key and value pair from the global queue.
+	// If no song is left in the server queue. Leave the voice channel and delete the queue and value pair from the global queue.
 	if (!args) {
 	//	song_queue.voice_channel.leave();
 		const command = message.client.commands.get('leave');
@@ -125,16 +126,8 @@ const video_player = async (guild, args, player, message, skip2) => {
 		queue.delete(message.guild.id);
 		return;
 	}
-	// search based on next arg
-	const yt_info = await play.search(args, { limit:1 });
-	// create stream from arg
-	const stream = await play.stream(yt_info[0].url);
-	// after stream generated, create file from the url of hte search query
-	const resource = createAudioResource(stream.stream, {
-		inputType : stream.type,
-	});
-	// play file
-	player.play(resource);
+	playNext(guild, args, player, message);
+
 	// listen after the song is playing
 	player.on('stateChange', (oldState, newState) => {
 		if (oldState.status == 'playing' && newState.status == 'idle') {
@@ -143,9 +136,5 @@ const video_player = async (guild, args, player, message, skip2) => {
 			video_player(guild, song_queue.songs[0], player, message, false);
 		}
 	});
-	/* player.on(AudioPlayerStatus.Idle, () => {
-		song_queue.songs.shift();
-		video_player(guild, song_queue.songs[0], player, message);
-	});*/
-	await message.channel.send(`🎶 Now playing **${resource.title}**`);
+
 };
