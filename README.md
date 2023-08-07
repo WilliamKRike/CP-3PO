@@ -16,5 +16,5 @@ Plans for bot <br />
 -show user current songs, queue and <br />
 <br />
 <br />
-LONG TERM GOAL
+- LONG TERM GOAL <br />
 -take voice data from another account; like a google home <br />
